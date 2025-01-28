@@ -1,0 +1,23 @@
+{% load static tailwind_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+        layout title
+        {% endblock %}
+    </title>
+    <link rel="stylesheet" href="{% static 'manualcss.css' %}">
+    {% tailwind_css %}
+</head>
+<body>
+
+    {% block content %}
+    <h1> layout content </h1>
+    {% endblock %}
+    
+</body>
+</html>
