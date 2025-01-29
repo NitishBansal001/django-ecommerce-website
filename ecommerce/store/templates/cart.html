@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+
+
+<div class="container m-auto">
+  <div class="p-5 pb-1 bg-black rounded-3">
+    <a href="{% url "index" %}"> <button class="btn btn-secondary btn-lg rounded-lg">Continue shopping</button> </a>
+    <hr>
+    <div class=" gap-2 mb-5">
+        <p class="col-lg-8 mx-auto fs-5 text-muted">
+            Items : <span> 6 </span>
+        </p>
+        <p class="col-lg-8 mx-auto fs-5 text-muted">
+            Total : <span> $$ </span>
+        </p>
+
+      <a href="{% url "checkout" %}"> 
+      <button class="btn btn-success btn-lg rounded-pill" type="button">
+       Checkout
+      </button>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="container m-auto mt-3">
+    <div class="p-5 pb-1 bg-black rounded-3">
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">Itemt</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><img src="" width="100px" alt="asdf"></td>
+                <td>Item name</td>
+                <td>$$</td>
+                <td>12 <span><span><img src="#" alt="up"><span><img src="#" alt="down"><span></td>
+                <td>$$ * 12</td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+  </div>
+  
+
+{% endblock %}
