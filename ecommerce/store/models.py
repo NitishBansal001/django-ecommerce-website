@@ -15,10 +15,21 @@ class Product(models.Model):
     name = models.CharField(max_length=100)
     price = models.IntegerField(default=0)
     digital = models.BooleanField(default=False,null=True,blank=True)
-    image = models.ImageField( upload_to='pics/', height_field=None, width_field=None, max_length=None,blank=True,null=True)
+    image = models.ImageField( upload_to='pics/',blank=True,null=True)
 
     def __str__(self):
         return f'{self.name}'
+    
+    # for acessing it like an attribute
+    @property
+    def imageURL(self):
+        try :
+            url = self.image.url
+        except:
+            url = ''
+        return url   
+
+
     
 class Order(models.Model):
     customer = models.ForeignKey(Customer,on_delete=models.SET_NULL,null=True,blank=True)
@@ -35,7 +46,9 @@ class OrderItem(models.Model):
     quantity = models.IntegerField(default=0,null=True,blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
 
-    
+    def __str__(self):
+        return f'{self.product}------{self.order}'
+
 class ShippingAddress(models.Model):
     customer = models.ForeignKey(Customer,on_delete=models.SET_NULL ,null=True )
     order = models.ForeignKey(Order,on_delete=models.SET_NULL ,null=True )
