@@ -133,6 +133,10 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')]
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
+# settings.py ## added manually 
+LOGIN_REDIRECT_URL = '/store/'  # Redirect after login (home page, or other)
+LOGOUT_REDIRECT_URL = '/store/'  # Redirect after logout (home page, or other)
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

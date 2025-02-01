@@ -2,9 +2,36 @@ from django.shortcuts import render
 from .models import *
 from django.shortcuts import get_object_or_404,get_list_or_404, redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login
 from .forms import *
 import uuid
 # Create your views here.
+
+
+def search_bar(request):
+    if request.method == "POST":
+        searchbar_text = request.POST['searchbar_text']
+        products = Product.objects.filter(name=searchbar_text)  # Case-insensitive search
+        return render(request, 'search_bar.html', {'searchbar_text': searchbar_text, 'products': products})
+    else:
+        return render(request, 'search_bar.html')
+
+
+
+def register(request):
+    if request.method == "POST":
+        form = UserRegisterationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.set_password(form.cleaned_data['password1'])
+            user.save()
+            login(request,user)
+            return redirect('index')
+    else:
+        form = UserRegisterationForm()
+    return render(request,'registration/register.html',{'form':form})
+
+
 
 
 # def index(request):
@@ -31,7 +58,6 @@ def index(request):
             currentorder = Order.objects.filter(id=currentorder_id, complete=False).first()
         else:
             # If no 'order_id' cookie, create a new order and set the cookie
-            print('2currentorder_id',currentorder_id,shipping=False)
             currentorder = None
 
 

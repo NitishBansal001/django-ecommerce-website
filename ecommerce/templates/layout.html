@@ -46,14 +46,24 @@
                 </ul>
               </li>
             </ul>
-            <form class="d-flex" role="search">
-              <input class="form-control me-3" type="search" placeholder="Search" aria-label="Search">
+            <form class="d-flex" role="search" method="post" action ='{% url "search_bar" %}'>
+              {% csrf_token %}
+              <input class="form-control me-3" type="search" placeholder="enter text" aria-label="Search" name="searchbar_text" value="{{searchbar_text}}">
               <button class="btn btn-outline-success me-3" type="submit">Search</button>
-              <button class="btn btn-outline-primary" type="submit">Login</button>
             </form>
+            {% if user.is_authenticated %}
+            <form action="{% url "logout" %}" method="post">
+              {% csrf_token %}
+              <button class="btn btn-outline-primary me-3" type="submit">Logout</button>
+            </form>
+            {% else %}
+            <a href="{% url "login" %}" class="btn btn-success mx-2">Login</a>
+            <a href="{% url "register" %}" class="btn btn-warning mx-2">Sign Up</a>
+            {% endif %}
           </div>
         </div>
       </nav>
+
 
     {% block content %}
 
